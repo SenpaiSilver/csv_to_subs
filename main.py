@@ -11,7 +11,7 @@ def get_subtitles(c):
     lines = []
     print("Parsing translation")
     for reader in csv.reader(io.StringIO(c), delimiter=','):
-        if len(reader) > 4 and pattern.search(reader[0]) and pattern.search(reader[1]):
+        if len(reader) > 4 and pattern.search(reader[0]) and pattern.search(reader[1]) and reader[4]!="":
             lines.append([
                 reader[0],
                 reader[1],
@@ -40,7 +40,7 @@ def main(args=None):
         for line in get_subtitles(sheet):
             f.write("\n")
             f.write("%d\n" % (i))
-            f.write("00:%s,000 --> 00:%s,000\n" % (line[0], line[1]))
+            f.write("00:%s --> 00:%s\n" % (line[0], line[1]))
             f.write(line[2])
             f.write("\n")
             i += 1
